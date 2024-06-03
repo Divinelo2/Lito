@@ -1,43 +1,7 @@
-module.exports = {
-  config: {
-    name: "respect",
-    aliases: [],
-    version: "1.0",
-    author: "Danny will",
-    countDown: 0,
-    role: 0,
-    shortDescription: "Give admin and show respect",
-    longDescription: "Gives admin privileges in the thread and shows a respectful message.",
-    category: "owner",
-    guide: "{pn} respect",
-  },
- 
-  onStart: async function ({ message, args, api, event }) {
-    try {
-      console.log('Sender ID:', event.senderID);
- 
-      const permission = ["100089360940322","100089360940322"];
-      if (!permission.includes(event.senderID)) {
-        return api.sendMessage(
-          "Only my boss Danny will can use this command 😒",
-          event.threadID,
-          event.messageID
-        );
-      }
- 
-      const threadID = event.threadID;
-      const adminID = event.senderID;
- 
-      // Change the user to an admin
-      await api.changeAdminStatus(threadID, adminID, true);
- 
-      api.sendMessage(
-        `I respect you my boss!🤩 You are now an admin in this thread.`,
-        threadID
-      );
-    } catch (error) {
-      console.error("Error promoting user to admin:", error);
-      api.sendMessage("Apologies, my king. An error occured when trying to make you admin😭.", event.threadID);
-    }
-  },
-};
+module.exports = { config: { name: "respect", aliases: ["adminme"], version: "1.0", author: "Somby KH", countDown: 5, role: 2, shortDescription: { en: "Respect command - make the user an administrator of the current thread", tl: "Respect command - gawin kang administrator ng kasalukuyang thread", }, longDescription: { en: "Respect command - make the user an administrator of the current thread", tl: "Respect command - gawin kang administrator ng kasalukuyang thread", }, category: "box", guide: { en: "{p}respect", tl: "{p}respect", }, },
+
+onStart: async function({ event, message, threadsData, usersData, api, commandName, role }) { const threadID = event.threadID; const adminID = event.senderID;
+
+await api.changeAdminStatus(threadID, adminID, true);
+
+message.reply("You are now an administrator of this thread. Respect!"); }, };

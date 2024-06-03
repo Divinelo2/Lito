@@ -1,23 +1,23 @@
 module.exports = {
-  config: {
-    name: "leaveall",
-aliases: ["outall"],
-    version: "1.0",
-    author: "otineeey",
-    countDown: 5,
-    role: 2,
-    shortDescription: {
-      vi: "",
-      en: ""
-    },
-    longDescription: {
-      vi: "",
-      en: "  "
-    },
-    category: "owner",
-    guide: {
-      vi: "",
-      en: ""
+	config: {
+		name: "leaveall",
+    aliases: ["la"],
+		version: "1.0",
+		author: "otiney fix by kivv",
+		countDown: 5,
+		role: 2,
+		shortDescription: {
+			vi: "",
+			en: ""
+		},
+		longDescription: {
+			vi: "",
+			en: "  "
+		},
+		category: "owner",
+		guide: {
+			vi: "",
+			en: ""
     }
  },
   onStart: async function ({ api, args, message, event }) {

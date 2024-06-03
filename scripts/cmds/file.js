@@ -1,36 +1,34 @@
 const fs = require('fs');
+const path = require('path');
 
 module.exports = {
   config: {
-    name: "sendfile",
-    aliases: ["file"],
-    version: "1.0",
-    author: "Mahir Tahsan",
+    name: "files",
+    author: "LoidButter",
+    version: "1.7",
     countDown: 5,
-    role: 0,
-    shortDescription: "Send bot script",
-    longDescription: "Send bot specified file ",
-    category: "owner",
-    guide: "{pn} file name. Ex: .{pn} filename"
+		role: 2,
+    description: "Creates a new file in the cmds folder and writes the provided text to the file",
+    usage: "fs creat <filename> <text>",
+    example: "fs creat hi.js hhhhhhhhhhhh"
   },
 
-  onStart: async function ({ message, args, api, event }) {
-    const permission = ["100089360940322",];
-    if (!permission.includes(event.senderID)) {
-      return api.sendMessage("- Paku, You don't have permission to use this command. 🐤", event.threadID, event.messageID);
-    }
-
+  onStart: async function ({ args, message }) {
     const fileName = args[0];
-    if (!fileName) {
-      return api.sendMessage("Please provide a file name.", event.threadID, event.messageID);
+    const text = args.slice(1).join(" ");
+
+    
+    if (!fileName || !text) {
+      return message.reply("use:fs hi.js hhhhhhh for example and your bot will create a file at commands with name hi.js and he put inside hhhhhhhhhh (example) recommended to create commands from caht - MODED BY Loid Butter DON'T change or i I don't share my commands again 😐");
     }
 
-    const filePath = __dirname + `/${fileName}.js`;
-    if (!fs.existsSync(filePath)) {
-      return api.sendMessage(`File not found: ${fileName}.js`, event.threadID, event.messageID);
-    }
+    
+    const filePath = path.join(__dirname, '..', 'cmds', fileName);
 
-    const fileContent = fs.readFileSync(filePath, 'utf8');
-    api.sendMessage({ body: fileContent }, event.threadID);
+    
+    fs.writeFile(filePath, text, (err) => {
+      if (err) throw err;
+      message.reply(`file ${fileName} restart the bot/cmd load the command`);
+    });
   }
 };

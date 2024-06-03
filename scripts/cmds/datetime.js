@@ -1,32 +1,28 @@
-const NepaliDate = require('nepali-date');
 const moment = require('moment-timezone');
 
 module.exports = {
   config: {
     name: "datetime",
-    aliases: [],
-    version: "1.3",
-    author: "hặy7hựuw",
-    countDown: 1,
+    version: "1.4",
+    author: "kae",
+    countdown: 5,
     role: 0,
-    shortDescription: "Displays the current date and time in Nepal.",
+    shortDescription: "Displays the current date and time in the Philippines.",
     longDescription: "",
-    category: "Date-Time",
+    category: "misc",
     guide: "{prefix}{name}",
     envConfig: {}
   },
-  onStart: async function({ message, args }) {
-    const nepalTime = moment.tz("Asia/Kathmandu").format("h:mm:ss A");
-    const nepaliDate = new NepaliDate(new Date());
-    const bsDateStr = nepaliDate.format("dddd, DD MMMM YYYY");
 
-    const reply = `Today Date & Time in Nepal:\n` +
-                  `☛Date: ${moment.tz("Asia/Kathmandu").format("dddd, DD MMMM YYYY")}\n` +
-                  `☛Time: ${nepalTime}\n` +
-                  `☛BsDate: ${bsDateStr}`;
+  onStart: async function({ message, args }) {
+    const philippinesTime = moment.tz("Asia/Manila").format("h:mm:ss A");
+    const philippinesDate = moment.tz("Asia/Manila").format("dddd, DD MMMM YYYY");
+
+    const reply = `Today Date & Time in the Philippines:\n` +
+      `❏Date: ${philippinesDate}\n` +
+      `❏Time: ${philippinesTime}`;
 
     message.reply(reply);
   },
   onEvent: async function() {}
 };
-//contact kshitiz to make your own country time date
